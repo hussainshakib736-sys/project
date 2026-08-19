@@ -1,4 +1,4 @@
-import {useState,useRef} from "react";
+import {useRef} from "react";
 // import TodoItem from "./TodoItem";
 import { BiBible } from "react-icons/bi";
 
@@ -12,7 +12,7 @@ function AddTodo({onNewItem}){
     const todoName = todoNameElement.current.value;
    const dueDate = dueDateElement.current.value;
     // console.log(`${todoName} due on:${dueDate}`);
-    
+    //useRef ka use kerke page ko repant hone se bacha lete hai
     todoNameElement.current.value = "";
     dueDateElement.current.value = "";
     onNewItem(todoName,dueDate);

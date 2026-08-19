@@ -11,11 +11,18 @@ function App() {
 
   const [todoItems, setTodoItems] = useState([]);
   const handleNewItem = (itemName, itemDueDate)=>{
-  console.log(`New Item Added:${itemName} Date:${itemDueDate}`)
-  const newTodoItems = [...todoItems,{name:itemName,
-        dueDate:itemDueDate}]
-        setTodoItems(newTodoItems);
-  }
+ 
+  // setTodoItems((currValue) =>{
+  //  const newTodoItems = [...currValue,
+  //     {name: itemName, dueDate: itemDueDate},];
+  //       return newTodoItems;
+  // })   //long syntax mein written hai 
+   setTodoItems((currValue) => [
+   ...currValue,
+      {name:itemName,dueDate:itemDueDate},]   
+  );  //single line element hai isi liye short cut syntax use kiya hai 
+};
+  
 
   const handleDeleteItem =(todoItemName) =>{
    const newTodoItems = todoItems.filter((item) => item.name !== todoItemName);

@@ -1,38 +1,43 @@
-import { useState } from "react";
-import TodoItem from "./TodoItem";
+import {useState,useRef} from "react";
+// import TodoItem from "./TodoItem";
 import { BiBible } from "react-icons/bi";
-function AddTodo({onNewItem}){
-  const [todoName,setTodoName] = useState ("");
-  const [dueDate, setDueDate] = useState("");
-  const handleChangeName = (event) => {
-    setTodoName(event.target.value);
-  };
-  const handleChangeDate = (event) => {
-   setDueDate(event.target.value);
-  };
-  const handleAddButtonClicked = () => {
-    onNewItem(todoName, dueDate)
-    setDueDate("");
-    setTodoName("");
-  }
 
-return <div className="container text-center">
-        <div className="row kg-row">
+function AddTodo({onNewItem}){
+
+  const todoNameElement = useRef();
+  const dueDateElement = useRef();
+
+  const handleAddButtonClicked = (event) => {
+    event.preventDefault();
+    const todoName = todoNameElement.current.value;
+   const dueDate = dueDateElement.current.value;
+    // console.log(`${todoName} due on:${dueDate}`);
+    
+    todoNameElement.current.value = "";
+    dueDateElement.current.value = "";
+    onNewItem(todoName,dueDate);
+  
+  };
+return (
+<div className="container text-center">
+        <form className="row kg-row" onSubmit={handleAddButtonClicked}>
            <div className="col-6">
-            <input type = "text" placeholder="Enter Todo Here"value={todoName}
-            onChange={handleChangeName}/>
+            <input type = "text" 
+            ref={todoNameElement}
+            placeholder="Enter Todo Here"
+            />
             </div>
              <div className="col-4">
-              <input type="date" 
-              value={dueDate}
-              onChange={handleChangeDate} />
+              <input type="date" ref={dueDateElement}
+               />
              </div>
             <div className="col-2">
-              <button type="button" className="btn btn-success kg-btn btn-add"
-               onClick={handleAddButtonClicked}
-               ><BiBible /></button>
+              <button type="submit" className="btn btn-success kg-btn btn-add" >
+                <BiBible />
+                </button>
             </div>
-        </div>
+        </form>
       </div> 
-}
+)
+};
 export default AddTodo;

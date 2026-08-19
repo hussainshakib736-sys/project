@@ -1,9 +1,9 @@
 import { useState } from "react";
 import TodoItem from "./TodoItem";
-
+import { BiBible } from "react-icons/bi";
 function AddTodo({onNewItem}){
-  const [todoName,setTodoName] = useState ();
-  const [dueDate, setDueDate] = useState();
+  const [todoName,setTodoName] = useState ("");
+  const [dueDate, setDueDate] = useState("");
   const handleChangeName = (event) => {
     setTodoName(event.target.value);
   };
@@ -30,7 +30,7 @@ return <div className="container text-center">
             <div className="col-2">
               <button type="button" className="btn btn-success kg-btn btn-add"
                onClick={handleAddButtonClicked}
-               >Add</button>
+               ><BiBible /></button>
             </div>
         </div>
       </div> 
